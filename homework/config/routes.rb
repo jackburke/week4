@@ -1,5 +1,8 @@
 MoviesApp::Application.routes.draw do
 
+  resources :theaters
+
+
   get '/movies', controller: 'movies', action: 'index', as: 'movies'
 
   get '/movies/new', controller: 'movies', action: 'new', as: 'new_movie'

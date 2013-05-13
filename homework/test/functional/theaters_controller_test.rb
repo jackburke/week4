@@ -2,16 +2,13 @@ require 'test_helper'
 
 class TheatersControllerTest < ActionController::TestCase
   setup do
-    @theater = Theater.new
-    @theater.address = "222 Merchandise Mart Plaza"
-    @theater.name = "Mart Theater"
-    @theater.phone_number = "312-312-1234"
-    @theater.save
+    @theater = theaters(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
+    assert_not_nil assigns(:theaters)
   end
 
   test "should get new" do
@@ -24,7 +21,7 @@ class TheatersControllerTest < ActionController::TestCase
       post :create, theater: { address: @theater.address, name: @theater.name, phone_number: @theater.phone_number }
     end
 
-    assert_redirected_to "/theaters"
+    assert_redirected_to theater_path(assigns(:theater))
   end
 
   test "should show theater" do
@@ -47,6 +44,6 @@ class TheatersControllerTest < ActionController::TestCase
       delete :destroy, id: @theater
     end
 
-    assert_redirected_to "/theaters"
+    assert_redirected_to theaters_path
   end
 end
